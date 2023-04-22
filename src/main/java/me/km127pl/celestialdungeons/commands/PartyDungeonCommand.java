@@ -15,7 +15,7 @@ public class PartyDungeonCommand extends BaseCommand {
 
     @HelpCommand
     @Default
-    @CommandCompletion("create")
+    @CommandCompletion("create|list")
     public void onMainPartyCommand(Player player) {
         //TODO:Show help message
     }
