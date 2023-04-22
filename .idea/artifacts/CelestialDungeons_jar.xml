@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CelestialDungeons:jar">
+    <output-path>$USER_HOME$/Desktop/test_server/plugins</output-path>
+    <root id="archive" name="CelestialDungeons.jar">
+      <element id="module-output" name="CelestialDungeons" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/co/aikar/acf-paper/0.5.1-SNAPSHOT/acf-paper-0.5.1-20230402.215239-24.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
