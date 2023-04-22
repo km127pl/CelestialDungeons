@@ -4,7 +4,6 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import me.km127pl.celestialdungeons.CelestialDungeons;
 import me.km127pl.celestialdungeons.dungeons.DungeonCreator;
-import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

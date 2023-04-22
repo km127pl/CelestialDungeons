@@ -4,16 +4,18 @@ import co.aikar.commands.PaperCommandManager;
 import me.km127pl.celestialdungeons.commands.BaseDungeonCommand;
 import me.km127pl.celestialdungeons.commands.PartyDungeonCommand;
 import me.km127pl.celestialdungeons.listeners.PlayerListener;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class CelestialDungeons extends JavaPlugin {
 
     private static Logger logger;
+
+    public static void log(String message) {
+        logger.info(message);
+    }
 
     @Override
     public void onEnable() {
@@ -43,9 +45,5 @@ public final class CelestialDungeons extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-
-    public static void log(String message) {
-        logger.info(message);
     }
 }

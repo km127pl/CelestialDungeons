@@ -1,9 +1,7 @@
 package me.km127pl.celestialdungeons.party;
 
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.A;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +40,7 @@ public class PartyManager {
         public Date createdAt;
         public UUID owner;
         public ArrayList<UUID> members;
+
         public Party(Player player) {
             new Party(player.getUniqueId());
         }
