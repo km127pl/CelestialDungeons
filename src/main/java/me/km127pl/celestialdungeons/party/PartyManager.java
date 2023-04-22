@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PartyManager {
 
@@ -16,12 +17,13 @@ public class PartyManager {
         if (parties.containsKey(owner.getUniqueId())) return false;
         parties.put(
                 owner.getUniqueId(),
-                new Party(owner)
+                new Party(owner.getUniqueId())
         );
         return true;
     }
 
     public static boolean disbandParty(Player owner) {
+        //TODO:Notify members
         if (!parties.containsKey(owner.getUniqueId())) return false;
         parties.remove(
                 owner.getUniqueId()
@@ -36,6 +38,18 @@ public class PartyManager {
         return true;
     }
 
+    public static boolean hasParty(Player player) {
+        AtomicBoolean has = new AtomicBoolean(false);
+
+        parties.forEach((uuid, party) -> {
+            if (party.has(player.getUniqueId())) {
+                has.set(true);
+            }
+        });
+
+        return has.get();
+    }
+
     public static class Party {
         public Date createdAt;
         public UUID owner;
@@ -48,11 +62,21 @@ public class PartyManager {
         public Party(UUID ownerUUID) {
             this.owner = ownerUUID;
             this.members = new ArrayList<>();
+            // the owner should also be a member of the party
+            this.members.add(ownerUUID);
             this.createdAt = Date.from(Instant.now());
         }
 
         public Date getCreatedAt() {
             return createdAt;
+        }
+
+        public boolean has(UUID player) {
+            return members.contains(player);
+        }
+
+        public boolean isOwner(UUID player) {
+            return this.owner == player;
         }
 
         public UUID getOwner() {
