@@ -1,0 +1,49 @@
+- Player chat prefix if one is in a dungeon
+- Hearts on tab
+- Assign a random colour to the dungeon and to every player in the dungeon
+- Parties (up to n)
+- Per-player loot chests in the dungeon *might be too op
+- Multi-size rooms, 2x2, 3x3 et cetera
+- Create the dungeons in another world, so it doesnt interfere with overworld
+- When player leaves, and is in party chat, and joins back, notify with
+    - "&aYou are currently in &e<command /party chat>PARTY CHAT</command>&a."
+
+- Custom join/leave messages for the dungeon
+    - "&e{PLAYER_NAME} &ahas joined the &{DUNGEON_COLOR}{DUNGEON_NAME}&a!"
+    - "&e{PLAYER_NAME} &ahas left the &{DUNGEON_COLOR}{DUNGEON_NAME}&a!
+
+- Dungeon maze generation
+    - generate a starting point room in the middle of the dungeon
+    - generate a n long hallway (to the north) of the starting point
+    - while generating the hallway, add rooms/or additional hallways to the sides
+    - repeat until max rooms requirement is met
+
+- /dungeon command
+    - create <dungeon_type> {celestialdungeons.admin}
+    - locate, find <latest/unix_timestamp shown as a date> {celestialdungeons.admin}
+    - teleport <as locate> {celestialdungeons.admin}
+    - loot [subcommand]
+        - give <dungeon_id> <loot_id> <amount> {celestialdungeons.admin}
+        - list <dungeon_id>
+    - subcommand [party] of command </party>
+    - list
+        - lists dungeon types
+    - reload
+        - reloads all config filesfor dungeons
+- /party command <basically what hypixel has>
+    - invite, add [player/uuid]
+        - invites a player to the party, if they're already not in one
+    - accept [player/uuid]
+        - internal command for accepting invites on the message
+    - deny [player/uuid]
+         - same as above, only for denying the invite
+    - list
+         - lists all players in the party
+    - hijack {celestialdungeons.admin}
+         - hijacks a party to become its owner
+    - kick [player]
+         - kicks a player from a party, if you're the owner of it
+    - leave
+         - leaves a party, if you're the owner, gives the owner to a random person
+    - chat
+         - switches your chat to party chat, if already in party chat, switches back to global chat

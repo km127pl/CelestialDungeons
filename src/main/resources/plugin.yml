@@ -1,0 +1,5 @@
+name: CelestialDungeons
+version: '${project.version}'
+main: me.km127pl.celestialdungeons.CelestialDungeons
+api-version: 1.19
+authors: [km127pl]
