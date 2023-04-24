@@ -1,15 +1,16 @@
 package me.km127pl.celestialdungeons.party;
 
 import me.km127pl.celestialdungeons.CelestialDungeons;
+import me.km127pl.celestialdungeons.events.PlayerJoinPartyEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.K;
 
 import java.time.Instant;
+import java.time.temporal.TemporalField;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Function;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PartyManager {
 
@@ -59,6 +60,7 @@ public class PartyManager {
         invite.getParty().addMember(invitee.getUniqueId());
         invite.getParty().broadcast("<yellow>" + invitee.getName() + "<green> has joined the party!");
         denyInvite(invitee); // remove the invite after it has been accepted
+        PlayerJoinPartyEvent.fire(invitee, invite.getParty());
         return false; // no errors
     }
 
@@ -92,6 +94,17 @@ public class PartyManager {
         });
 
         return has.get();
+    }
+
+    public static Party getParty(Player player) {
+        AtomicReference<Party> _party = new AtomicReference<>();
+
+        parties.forEach((uuid, party) -> {
+            if (party.has(player.getUniqueId())) {
+                _party.set(party);
+            }
+        });
+        return _party.get();
     }
 
     public static class PartyInvite {

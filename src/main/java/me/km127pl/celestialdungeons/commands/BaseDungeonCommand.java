@@ -4,7 +4,11 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import me.km127pl.celestialdungeons.CelestialDungeons;
 import me.km127pl.celestialdungeons.dungeons.DungeonCreator;
+import me.km127pl.celestialdungeons.dungeons.maze.DungeonMazeGenerator;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 @CommandAlias("dungeon|celestialdungeons|cd")
@@ -25,8 +29,12 @@ public class BaseDungeonCommand extends BaseCommand {
     @Subcommand("create")
     @CommandPermission("celestialdungeons.create|celestialdungeons.admin")
     public void onCreateCommand(Player player) {
-        DungeonCreator creator = new DungeonCreator();
-        creator.createDungeonAt(player.getLocation());
+//        DungeonCreator creator = new DungeonCreator();
+//        creator.createDungeonAt(player.getLocation());
+        Location location = player.getLocation();
+        World world = location.getWorld();
+//        DungeonMazeGenerator generator = new DungeonMazeGenerator(32, 32, location);
+//        generator.generateMaze();
     }
 
     @Subcommand("locate")

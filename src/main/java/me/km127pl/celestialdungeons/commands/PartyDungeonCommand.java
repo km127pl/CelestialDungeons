@@ -4,7 +4,10 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import me.km127pl.celestialdungeons.CelestialDungeons;
+import me.km127pl.celestialdungeons.events.PlayerJoinPartyEvent;
+import me.km127pl.celestialdungeons.events.PlayerQuitPartyEvent;
 import me.km127pl.celestialdungeons.party.PartyManager;
+import me.km127pl.celestialdungeons.tablist.PartyTablist;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,14 +23,14 @@ public class PartyDungeonCommand extends BaseCommand {
 
     @HelpCommand
     @Default
-    @CommandCompletion("create|list|disband|kick|invite")
+    @CommandCompletion("create|list|disband|leave|kick|invite")
     public void onMainPartyCommand(Player player) {
         //TODO:Show help message
     }
 
     @HelpCommand
     @Default
-    @CommandCompletion("create|list|disband|invite|kick|@players")
+    @CommandCompletion("create|list|disband|leave|invite|kick|@players")
     public void onMainPartyCommand(Player player, OnlinePlayer toInvite) {
         onPartyInvite(player, toInvite); // /party <player> alias of /party invite <player>
     }
@@ -91,6 +94,8 @@ public class PartyDungeonCommand extends BaseCommand {
         } else {
             CelestialDungeons.message("<red>You already have a party!", player);
         }
+
+        PlayerJoinPartyEvent.fire(player, PartyManager.parties.get(player.getUniqueId()));
     }
 
     @Subcommand("list")
@@ -141,5 +146,19 @@ public class PartyDungeonCommand extends BaseCommand {
             party.broadcast("<yellow>" + kick.getName() + " <red>has been kicked from the party");
             CelestialDungeons.message("<red>You have been kicked from the party", kick);
         }
+    }
+
+    @Subcommand("leave")
+    public void onPartyLeave(Player player) {
+        PartyManager.Party party = PartyManager.getParty(player);
+        if (party == null) {
+            CelestialDungeons.message("<red>You don't have a party", player);
+            return;
+        }
+
+        party.removeMember(player.getUniqueId());
+        party.broadcast("<yellow>" + player.getName() + " <red>has left the party.");
+        CelestialDungeons.message("<red>You have left the party.", player);
+        PlayerQuitPartyEvent.fire(player, party);
     }
 }

@@ -3,6 +3,7 @@ package me.km127pl.celestialdungeons;
 import co.aikar.commands.PaperCommandManager;
 import me.km127pl.celestialdungeons.commands.BaseDungeonCommand;
 import me.km127pl.celestialdungeons.commands.PartyDungeonCommand;
+import me.km127pl.celestialdungeons.listeners.PartyEvents;
 import me.km127pl.celestialdungeons.listeners.PlayerListener;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -39,6 +40,7 @@ public final class CelestialDungeons extends JavaPlugin {
 
         PluginManager pluginManager = this.getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerListener(), this);
+        pluginManager.registerEvents(new PartyEvents(), this);
 
         log("Loading [4/5] - Dungeons and such");
         CelestialDungeons.mm = MiniMessage.miniMessage();
@@ -59,4 +61,5 @@ public final class CelestialDungeons extends JavaPlugin {
     public static void message(String message, Player player) {
         player.sendMessage(parse(message));
     }
+
 }
